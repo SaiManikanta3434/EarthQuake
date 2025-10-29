@@ -1,0 +1,115 @@
+@import "leaflet/dist/leaflet.css";
+
+/* ===== Tailwind must come first ===== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+/* ===== GLOBAL LAYOUT ===== */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  overflow-x: hidden;
+}
+
+/* ===== GOLD/BLACK GALAXY BACKGROUND ===== */
+.space-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 40% 40%, #d9b96a 0%, transparent 40%),
+              radial-gradient(circle at 70% 70%, #c5a35a 0%, transparent 40%),
+              linear-gradient(180deg, #000 0%, #090806 60%, #000 100%);
+  background-blend-mode: screen;
+  animation: bgPulse 40s ease-in-out infinite alternate;
+}
+@keyframes bgPulse {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.15); }
+  100% { filter: brightness(1); }
+}
+
+/* ===== STAR FIELD ===== */
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.9) 60%, transparent 61%),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,.7) 60%, transparent 61%),
+    radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,.6) 60%, transparent 61%),
+    radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,.5) 60%, transparent 61%);
+  background-size: 400px 400px, 500px 500px, 600px 600px, 700px 700px;
+  animation: starMove 200s linear infinite, twinkle 6s ease-in-out infinite;
+  opacity: 0.7;
+}
+@keyframes starMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 1000px; }
+}
+@keyframes twinkle {
+  0%,100% { filter: brightness(1); }
+  50% { filter: brightness(1.4); }
+}
+
+/* ===== PLANETS ===== */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: inset -4px -4px 10px rgba(0,0,0,.6),
+              0 0 15px rgba(212,175,55,.4);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), transparent 70%);
+  overflow: hidden;
+}
+.planet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 25% 25%, rgba(255,215,0,.2), transparent 70%);
+}
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  background: linear-gradient(90deg, rgba(255,215,0,0.05) 0%, rgba(0,0,0,0.5) 50%, rgba(255,215,0,0.05) 100%);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,215,0,0.2);
+  box-shadow: 0 0 20px rgba(212,175,55,0.3);
+  transition: all 0.3s ease-in-out;
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+}
+.filter-bar:hover {
+  box-shadow: 0 0 40px rgba(255,215,0,0.5);
+  border-color: rgba(255,215,0,0.4);
+}
+
+/* ===== UTILITIES ===== */
+.text-gold-gradient {
+  background: linear-gradient(90deg, #ffcc33, #ffdf85);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.planet-glow {
+  filter: drop-shadow(0 0 10px rgba(255,215,0,0.5))
+          drop-shadow(0 0 20px rgba(255,215,0,0.3));
+}
+
+@media (max-width: 640px) {
+  .planet {
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,.5),
+                0 0 8px rgba(212,175,55,.3);
+  }
+}
