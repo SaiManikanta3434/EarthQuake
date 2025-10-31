@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/earthquakes");
+        const response = await fetch("https://earth-quake-backend.vercel.app/api/earthquakes");
         const data = await res.json();
         setEarthquakes(data.features || []);
         setFilteredData(data.features || []);
