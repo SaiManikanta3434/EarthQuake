@@ -10,12 +10,14 @@ export default function Home() {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [filteredData, setFilteredData] = useState([]);
 
-  // Fetch data from backend API
+  // ✅ Fetch data from backend API
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://earth-quake-backend.vercel.app/api/earthquakes");
-        const data = await res.json();
+        const response = await fetch(
+          "https://earth-quake-backend.vercel.app/api/earthquakes"
+        );
+        const data = await response.json(); // ✅ fixed variable name
         setEarthquakes(data.features || []);
         setFilteredData(data.features || []);
       } catch (error) {
@@ -167,7 +169,7 @@ export default function Home() {
           Get Started
         </motion.button>
       </section>
-      <MapPlaceholder/>
+      <MapPlaceholder />
     </div>
   );
 }
