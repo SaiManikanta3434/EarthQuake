@@ -10,8 +10,7 @@ export default function Map() {
   useEffect(() => {
     const fetchEarthquakes = async () => {
       try {
-        // 🔗 Fetching from your Express backend instead of USGS directly
-        const response = await fetch("http://localhost:5000/api/earthquakes");
+        const response = await fetch("https://earth-quake-backend.vercel.app/api/earthquakes");
         const data = await response.json();
         setEarthquakes(data.features || []);
       } catch (error) {
